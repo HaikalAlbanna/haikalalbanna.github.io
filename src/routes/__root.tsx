@@ -7,10 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -37,9 +36,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -77,10 +73,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Arka Wijaya — Full-Stack Developer & Digital Craftsman" },
-      { name: "description", content: "Portofolio personal Arka Wijaya, seorang full-stack developer yang membangun produk digital modern, elegan, dan berperforma tinggi." },
-      { name: "author", content: "Arka Wijaya" },
-      { property: "og:title", content: "Arka Wijaya — Full-Stack Developer" },
+      { title: "Haikal Tirta Albanna — Full-Stack Developer & Data Analyst" },
+      { name: "description", content: "Portofolio personal Haikal Tirta Albanna, seorang full-stack developer dan data analyst yang membangun produk digital modern, elegan, dan berperforma tinggi." },
+      { name: "author", content: "Haikal Tirta Albanna" },
+      { property: "og:title", content: "Haikal Tirta Albanna — Full-Stack Developer & Data Analyst" },
       { property: "og:description", content: "Membangun produk digital modern dengan desain elegan dan performa tinggi." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

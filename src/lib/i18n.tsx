@@ -7,8 +7,8 @@ const dict = {
     nav: { home: "Beranda", about: "Tentang", skills: "Keahlian", projects: "Proyek", experience: "Karier", contact: "Kontak", cta: "Hubungi Saya" },
     hero: {
       badge: "Tersedia untuk proyek baru",
-      role: "Full-Stack Developer & Digital Craftsman",
-      name: "Arka Wijaya",
+      role: "Full-Stack Developer & Data Analyst",
+      name: "Haikal Tirta Albanna",
       desc: "Saya merancang dan membangun produk digital yang elegan, cepat, dan berorientasi pada pengalaman pengguna. Berbasis di Jakarta, bekerja dengan tim di seluruh dunia.",
       viewProjects: "Lihat Proyek",
       downloadCV: "Unduh CV",
@@ -60,9 +60,9 @@ const dict = {
       eyebrow: "Testimoni",
       title: "Apa kata mereka yang pernah bekerja bersama.",
       items: [
-        { quote: "Arka menggabungkan sensitivitas desain dan disiplin engineering dengan sangat baik. Hasilnya rapi dan cepat.", name: "Maya Larasati", role: "Product Lead, Meridian" },
+        { quote: "Haikal menggabungkan sensitivitas desain dan disiplin engineering dengan sangat baik. Hasilnya rapi dan cepat.", name: "Maya Larasati", role: "Product Lead, Meridian" },
         { quote: "Komunikasi jelas, eksekusi tepat waktu, dan detail visual yang jarang saya temui pada developer.", name: "Reza Aditama", role: "Founder, Kioswara" },
-        { quote: "Bekerja dengan Arka membuat proses handoff desain ke development terasa mulus.", name: "Sinta Prameswari", role: "Design Lead, Halo Digital" },
+        { quote: "Bekerja dengan Haikal membuat proses handoff desain ke development terasa mulus.", name: "Sinta Prameswari", role: "Design Lead, Halo Digital" },
       ],
     },
     contact: {
@@ -75,14 +75,14 @@ const dict = {
       send: "Kirim Pesan",
       sent: "Terkirim — terima kasih!",
     },
-    footer: "Dibuat dengan teliti oleh Arka Wijaya.",
+    footer: "Dibuat dengan teliti oleh Haikal Tirta Albanna.",
   },
   en: {
     nav: { home: "Home", about: "About", skills: "Skills", projects: "Work", experience: "Career", contact: "Contact", cta: "Get in touch" },
     hero: {
       badge: "Available for new projects",
-      role: "Full-Stack Developer & Digital Craftsman",
-      name: "Arka Wijaya",
+      role: "Full-Stack Developer & Data Analyst",
+      name: "Haikal Tirta Albanna",
       desc: "I design and build elegant, high-performance digital products with a focus on user experience. Based in Jakarta, working with teams around the world.",
       viewProjects: "View Projects",
       downloadCV: "Download CV",
@@ -134,9 +134,9 @@ const dict = {
       eyebrow: "Testimonials",
       title: "What collaborators say.",
       items: [
-        { quote: "Arka combines design sensitivity and engineering discipline beautifully. The output is crisp and fast.", name: "Maya Larasati", role: "Product Lead, Meridian" },
+        { quote: "Haikal combines design sensitivity and engineering discipline beautifully. The output is crisp and fast.", name: "Maya Larasati", role: "Product Lead, Meridian" },
         { quote: "Clear communication, on-time execution, and a level of visual detail I rarely see in a developer.", name: "Reza Aditama", role: "Founder, Kioswara" },
-        { quote: "Working with Arka makes the design-to-development handoff feel seamless.", name: "Sinta Prameswari", role: "Design Lead, Halo Digital" },
+        { quote: "Working with Haikal makes the design-to-development handoff feel seamless.", name: "Sinta Prameswari", role: "Design Lead, Halo Digital" },
       ],
     },
     contact: {
@@ -149,7 +149,7 @@ const dict = {
       send: "Send Message",
       sent: "Sent — thank you!",
     },
-    footer: "Crafted with care by Arka Wijaya.",
+    footer: "Crafted with care by Haikal Tirta Albanna.",
   },
 };
 
