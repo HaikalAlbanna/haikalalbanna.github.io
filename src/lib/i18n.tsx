@@ -151,9 +151,9 @@ const dict = {
     },
     footer: "Crafted with care by Arka Wijaya.",
   },
-} as const;
+};
 
-type Dict = typeof dict.id;
+type Dict = (typeof dict)["id"];
 
 const I18nContext = createContext<{ lang: Lang; t: Dict; toggle: () => void } | null>(null);
 
