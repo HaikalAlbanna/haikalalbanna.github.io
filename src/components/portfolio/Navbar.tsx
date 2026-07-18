@@ -37,11 +37,8 @@ export function Navbar() {
             scrolled ? "glass-panel shadow-lg" : ""
           }`}
         >
-          <a href="#home" className="flex items-center gap-2 font-display text-lg font-bold">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-primary to-[var(--accent-cyan)] text-primary-foreground shadow-md">
-              A
-            </span>
-            <span className="hidden sm:inline">Arka<span className="text-gradient">.</span></span>
+          <a href="#home" className="font-display text-lg font-bold">
+            <span className="sr-only">Home</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-1">

@@ -1,15 +1,73 @@
-import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Twitter, ExternalLink, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Download, ExternalLink, Github, Instagram, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import profileImg from "@/assets/profile.jpg";
 import heroAbstract from "@/assets/hero-abstract.png";
-import p1 from "@/assets/project-1.jpg";
-import p2 from "@/assets/project-2.jpg";
+import p1 from "@/assets/project1.png";
+import p2 from "@/assets/project2.png";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
+import htmlIcon from "@/assets/icon/html.png";
+import cssIcon from "@/assets/icon/css.png";
+import jsIcon from "@/assets/icon/file_type_js_official_icon_130509j.png";
+import tsIcon from "@/assets/icon/typescript.png";
+import reactIcon from "@/assets/icon/react.png";
+import phpIcon from "@/assets/icon/php.png";
+import laravelIcon from "@/assets/icon/laravel.png";
+import tailwindIcon from "@/assets/icon/tailwind.png";
+import bladeIcon from "@/assets/icon/blade.png";
+import bootstrapIcon from "@/assets/icon/bootstrap.png";
+import mysqlIcon from "@/assets/icon/mysql.png";
+import mariadbIcon from "@/assets/icon/mariadb.png";
+import wordIcon from "@/assets/icon/word.png";
+import excelIcon from "@/assets/icon/excel.png";
+import pptIcon from "@/assets/icon/powerpoint.png";
+import figmaIcon from "@/assets/icon/figma.png";
+import canvaIcon from "@/assets/icon/canva.png";
 
 const projectImages = [p1, p2, p3, p4];
+
+const skillIconMap: Record<string, string> = {
+  HTML: htmlIcon,
+  CSS: cssIcon,
+  JavaScript: jsIcon,
+  TypeScript: tsIcon,
+  React: reactIcon,
+  PHP: phpIcon,
+  Laravel: laravelIcon,
+  Tailwind: tailwindIcon,
+  Blade: bladeIcon,
+  Bootstrap: bootstrapIcon,
+  MySQL: mysqlIcon,
+  MariaDB: mariadbIcon,
+  Word: wordIcon,
+  Excel: excelIcon,
+  PowerPoint: pptIcon,
+  Figma: figmaIcon,
+  Canva: canvaIcon,
+};
+
+function SkillPlaceholder({ label }: { label: string }) {
+  const icon = skillIconMap[label] ?? htmlIcon;
+
+  return (
+    <div className="group flex w-28 flex-col items-center gap-3 rounded-[10px] border border-border bg-background p-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+      <div className="flex h-16 w-16 items-center justify-center rounded-[14px] border border-border bg-card p-2">
+        <img src={icon} alt={`${label} icon`} className="h-full w-full object-contain" />
+      </div>
+      <span className="text-sm font-semibold text-foreground">{label}</span>
+    </div>
+  );
+}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -31,8 +89,8 @@ export function Hero() {
             <Reveal>
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-xs font-medium">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-cyan)] opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent-cyan)]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-cyan opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-cyan" />
                 </span>
                 {t.hero.badge}
               </div>
@@ -40,9 +98,7 @@ export function Hero() {
 
             <Reveal delay={80}>
               <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-                {t.hero.name.split(" ")[0]}
-                <br />
-                <span className="text-gradient">{t.hero.name.split(" ")[1]}.</span>
+                {t.hero.name}
               </h1>
             </Reveal>
 
@@ -64,24 +120,14 @@ export function Hero() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="#"
+                  href="/CV - Haikal Tirta Albanna 2026.pdf"
+                  download
                   className="inline-flex items-center gap-2 rounded-xl border border-border bg-secondary/40 px-5 py-3 text-sm font-semibold transition-colors hover:bg-secondary"
                 >
                   <Download className="h-4 w-4" />
                   {t.hero.downloadCV}
                 </a>
               </div>
-            </Reveal>
-
-            <Reveal delay={360}>
-              <dl className="mt-12 grid grid-cols-3 gap-4 max-w-md">
-                {t.hero.stats.map((s) => (
-                  <div key={s.v} className="border-l-2 border-primary/60 pl-3">
-                    <dt className="font-display text-2xl font-bold sm:text-3xl">{s.k}</dt>
-                    <dd className="mt-1 text-xs text-muted-foreground">{s.v}</dd>
-                  </div>
-                ))}
-              </dl>
             </Reveal>
           </div>
 
@@ -104,19 +150,19 @@ export function Hero() {
                 <div className="relative overflow-hidden rounded-[1.5rem]">
                   <img
                     src={profileImg}
-                    alt="Arka Wijaya"
+                    alt={t.hero.name}
                     width={912}
                     height={1104}
                     className="h-full w-full object-cover"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/70 via-transparent" />
                 </div>
                 <div className="mt-3 flex items-center justify-between px-2 pb-1 text-xs">
                   <div className="flex items-center gap-1.5 text-muted-foreground">
                     <MapPin className="h-3.5 w-3.5" />
-                    Jakarta, ID
+                    Palembang, ID
                   </div>
-                  <div className="flex items-center gap-1.5 font-semibold text-[var(--accent-cyan)]">
+                  <div className="flex items-center gap-1.5 font-semibold text-accent-cyan">
                     <Sparkles className="h-3.5 w-3.5" />
                     Open to work
                   </div>
@@ -146,16 +192,6 @@ export function About() {
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
               <p>{t.about.p1}</p>
               <p>{t.about.p2}</p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {t.about.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
           </Reveal>
         </div>
@@ -175,26 +211,31 @@ export function Skills() {
             {t.skills.title}
           </h2>
         </Reveal>
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {t.skills.groups.map((g, i) => (
-            <Reveal key={g.name} delay={i * 80}>
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40">
-                <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/20 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="font-display text-xs font-bold uppercase tracking-widest text-[var(--accent-cyan)]">
-                  0{i + 1}
-                </div>
-                <h3 className="mt-2 font-display text-lg font-semibold">{g.name}</h3>
-                <ul className="mt-4 space-y-2">
-                  {g.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="h-1 w-1 rounded-full bg-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+        <div className="mt-12 grid gap-4 lg:grid-cols-[1.8fr_1fr]">
+          <Reveal key={t.skills.categories[0].name} delay={0}>
+            <div className="rounded-3xl border border-border bg-card p-6">
+              <h3 className="font-display text-lg font-semibold">{t.skills.categories[0].name}</h3>
+              <div className="mt-6 grid grid-cols-4 gap-2 justify-items-center">
+                {t.skills.categories[0].items.map((item) => (
+                  <SkillPlaceholder key={item.label} label={item.label} />
+                ))}
               </div>
-            </Reveal>
-          ))}
+            </div>
+          </Reveal>
+          <div className="grid gap-4">
+            {t.skills.categories.slice(1).map((category, i) => (
+              <Reveal key={category.name} delay={(i + 1) * 80}>
+                <div className="mx-auto w-full max-w-md rounded-3xl border border-border bg-card p-6">
+                  <h3 className="font-display text-lg font-semibold">{category.name}</h3>
+                  <div className={`mt-6 grid ${category.items.length === 3 ? "grid-cols-3" : "grid-cols-2"} gap-3 justify-items-center`}>
+                    {category.items.map((item) => (
+                      <SkillPlaceholder key={item.label} label={item.label} />
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -203,6 +244,48 @@ export function Skills() {
 
 export function Projects() {
   const { t } = useI18n();
+  const [api, setApi] = useState<CarouselApi | null>(null);
+  const [active, setActive] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const updateActive = () => {
+      try {
+        const idx = typeof api.selectedScrollSnap === "function" ? api.selectedScrollSnap() : api.selectedScrollSnap;
+        setActive(typeof idx === "number" ? idx : 0);
+      } catch {
+        setActive(0);
+      }
+    };
+
+    updateActive();
+    api.on("reInit", updateActive);
+    api.on("select", updateActive);
+
+    // ensure embla recalculates
+    api.reInit();
+
+    return () => {
+      api?.off("select", updateActive);
+      api?.off("reInit", updateActive);
+    };
+  }, [api]);
+
+  // autoplay
+  useEffect(() => {
+    if (!api) return;
+    if (isPaused) return;
+
+    const id = setInterval(() => {
+      if (!api) return;
+      api.scrollNext();
+    }, 4000);
+
+    return () => clearInterval(id);
+  }, [api, isPaused]);
+
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4">
@@ -212,47 +295,92 @@ export function Projects() {
             {t.projects.title}
           </h2>
         </Reveal>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {t.projects.items.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
-              <article className="group relative h-full overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-2xl">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={projectImages[i]}
-                    alt={p.title}
-                    width={1200}
-                    height={800}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur">
-                    {p.cat}
-                  </span>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-display text-xl font-semibold">{p.title}</h3>
-                    <a
-                      href="#"
-                      aria-label={t.projects.cta}
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-secondary/40 transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {p.tech.map((tech) => (
-                      <span key={tech} className="rounded-md bg-secondary/60 px-2 py-1 text-xs font-medium text-muted-foreground">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12 relative">
+          {/* show only first 2 projects */}
+          <Carousel
+            setApi={setApi}
+              className="overflow-hidden rounded-2xl border border-border bg-card p-3"
+              opts={{ align: "start", containScroll: "trimSnaps" }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <CarouselPrevious className="bg-background/70 text-foreground shadow-md left-4" />
+            <CarouselContent className="flex items-stretch">
+              {t.projects.items.slice(0, 2).map((p, i) => (
+                <CarouselItem
+                  key={p.title}
+                  className={`shrink-0 w-full px-2 transition-transform duration-300 ${
+                    i === active ? "scale-100 z-10" : "scale-95 opacity-90"
+                  }`}
+                >
+                  <article className="relative overflow-visible">
+                    {/* stacked shadow layers behind card */}
+                    <div className="absolute -inset-x-6 -inset-y-6 -z-20 flex items-center justify-center">
+                      <div className="hidden md:block h-85 w-160 rounded-2xl bg-linear-to-br from-black/20 to-black/10 transform translate-x-6 translate-y-4 shadow-2xl opacity-40" />
+                      <div className="hidden md:block h-85 w-160 rounded-2xl bg-linear-to-br from-black/10 to-black/5 transform translate-x-3 translate-y-2 shadow-lg opacity-30" />
+                    </div>
+
+                    <div className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-xl">
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_640px]">
+                        <div>
+                          <h3 className="font-display text-2xl font-bold text-foreground">{p.title}</h3>
+                          <p className="mt-4 text-base text-muted-foreground leading-relaxed max-w-xl">{p.desc}</p>
+
+                          <h4 className="mt-6 text-sm font-semibold text-foreground">Technologies</h4>
+                          <div className="mt-4 flex flex-wrap items-center gap-3">
+                            {p.tech.map((tech) => (
+                              <img key={tech} src={skillIconMap[tech] ?? htmlIcon} alt={tech} className="h-8 w-8 object-contain" />
+                            ))}
+                          </div>
+
+                          <div className="mt-8 flex flex-wrap gap-3">
+                            <a
+                              href="#"
+                              className="inline-flex items-center gap-3 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg hover:opacity-95"
+                            >
+                              <span className="inline-block h-3 w-3 rounded-full bg-white/30" />
+                              Live Demo
+                            </a>
+                            <a
+                              href={p.repo ?? "#"}
+                              target={p.repo ? "_blank" : undefined}
+                              rel={p.repo ? "noreferrer" : undefined}
+                              className="inline-flex items-center gap-3 rounded-full border border-border bg-secondary/40 px-5 py-3 text-sm font-semibold hover:bg-secondary"
+                            >
+                              <Github className="h-4 w-4" />
+                              Github Repository
+                            </a>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-center">
+                          <div className="relative rounded-xl bg-white p-0 shadow-lg w-full md:w-160">
+                            <div className="overflow-hidden rounded-lg">
+                              <img src={projectImages[i]} alt={p.title} className="w-full h-55 md:h-105 object-cover rounded-lg" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselNext className="bg-background/70 text-foreground shadow-md right-4" />
+          </Carousel>
+          <div className="mt-4 flex justify-center gap-2">
+            {t.projects.items.slice(0, 2).map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => api?.scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`h-2.5 w-2.5 rounded-full transition-all ${
+                  index === active ? "bg-primary scale-110" : "bg-muted"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -271,7 +399,7 @@ export function Experience() {
           </h2>
         </Reveal>
         <div className="relative mt-14 max-w-3xl">
-          <div className="absolute left-2 top-2 bottom-2 w-px bg-gradient-to-b from-primary via-border to-transparent md:left-1/2" />
+          <div className="absolute left-2 top-2 bottom-2 w-px bg-linear-to-b from-primary via-border to-transparent md:left-1/2" />
           <ol className="space-y-8">
             {t.exp.items.map((item, i) => (
               <Reveal key={item.role + item.period} delay={i * 80}>
@@ -280,7 +408,7 @@ export function Experience() {
                     <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_2px_var(--primary)]" />
                   </span>
                   <div className={`md:text-right md:pr-10 ${i % 2 === 1 ? "md:order-2 md:text-left md:pr-0 md:pl-10" : ""}`}>
-                    <div className="text-xs font-semibold uppercase tracking-widest text-[var(--accent-cyan)]">
+                    <div className="text-xs font-semibold uppercase tracking-widest text-accent-cyan">
                       {item.period}
                     </div>
                     <h3 className="mt-1 font-display text-lg font-semibold">{item.role}</h3>
@@ -317,7 +445,7 @@ export function Testimonials() {
                 <div className="font-display text-4xl leading-none text-primary">&ldquo;</div>
                 <blockquote className="mt-2 text-sm leading-relaxed text-foreground">{q.quote}</blockquote>
                 <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                  <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-primary to-[var(--accent-cyan)] font-display text-sm font-bold text-primary-foreground">
+                  <div className="grid h-10 w-10 place-items-center rounded-full bg-linear-to-br from-primary to-accent-cyan font-display text-sm font-bold text-primary-foreground">
                     {q.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div>
@@ -337,6 +465,9 @@ export function Testimonials() {
 export function Contact() {
   const { t } = useI18n();
   const [sent, setSent] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
 
   return (
     <section id="contact" className="relative py-24 sm:py-32">
@@ -356,23 +487,38 @@ export function Contact() {
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
                 {t.contact.title}
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">{t.contact.desc}</p>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                {t.contact.desc}
+              </p>
               <div className="mt-8 space-y-3">
-                <a href="mailto:hello@arka.dev" className="flex items-center gap-3 text-sm font-medium hover:text-primary">
+                <a
+                  href="mailto:haikalalbanna2313@gmail.com"
+                  className="flex items-center gap-3 text-sm font-medium hover:text-primary"
+                >
                   <span className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-secondary/40">
                     <Mail className="h-4 w-4" />
                   </span>
-                  hello@arka.dev
+                  haikalalbanna2313@gmail.com
                 </a>
                 <div className="flex items-center gap-2 pt-2">
                   {[
-                    { icon: Github, href: "#", label: "GitHub" },
-                    { icon: Linkedin, href: "#", label: "LinkedIn" },
-                    { icon: Twitter, href: "#", label: "Twitter" },
+                    { icon: Github, href: "https://github.com/HaikalAlbanna", label: "GitHub" },
+                    {
+                      icon: Linkedin,
+                      href: "https://www.linkedin.com/in/haikal-tirta-albanna-546575192/",
+                      label: "LinkedIn",
+                    },
+                    {
+                      icon: Instagram,
+                      href: "https://www.instagram.com/haikalalbanna23?igsh=NngwZG1sbnFhZDFx",
+                      label: "Instagram",
+                    },
                   ].map(({ icon: Icon, href, label }) => (
                     <a
                       key={label}
                       href={href}
+                      target="_blank"
+                      rel="noreferrer"
                       aria-label={label}
                       className="grid h-10 w-10 place-items-center rounded-lg border border-border bg-secondary/40 transition-all hover:border-primary hover:text-primary"
                     >
@@ -387,35 +533,58 @@ export function Contact() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  const subject = encodeURIComponent("Portofolio Contact from " + contactName);
+                  const body = encodeURIComponent(
+                    `Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`
+                  );
+                  const mailtoUrl = `mailto:haikalalbanna2313@gmail.com?subject=${subject}&body=${body}`;
+                  const opened = window.open(mailtoUrl, "_blank");
+                  if (!opened) {
+                    window.location.href = mailtoUrl;
+                  }
+                  setContactName("");
+                  setContactEmail("");
+                  setContactMessage("");
                   setSent(true);
                   setTimeout(() => setSent(false), 2600);
-                  (e.target as HTMLFormElement).reset();
                 }}
                 className="space-y-4"
               >
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t.contact.name}</span>
+                    <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t.contact.name}
+                    </span>
                     <input
                       required
                       type="text"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
                       className="w-full rounded-xl border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t.contact.email}</span>
+                    <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {t.contact.email}
+                    </span>
                     <input
                       required
                       type="email"
+                      value={contactEmail}
+                      onChange={(e) => setContactEmail(e.target.value)}
                       className="w-full rounded-xl border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </label>
                 </div>
                 <label className="block">
-                  <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t.contact.message}</span>
+                  <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {t.contact.message}
+                  </span>
                   <textarea
                     required
                     rows={5}
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
                     className="w-full resize-none rounded-xl border border-border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </label>
@@ -440,13 +609,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span className="grid h-6 w-6 place-items-center rounded-md bg-gradient-to-br from-primary to-[var(--accent-cyan)] text-[10px] font-bold text-primary-foreground">
-            A
-          </span>
-          {t.footer}
-        </div>
-        <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} Arka Wijaya</div>
+        <div className="text-sm text-muted-foreground">© 2026 Haikal Albanna</div>
       </div>
     </footer>
   );
