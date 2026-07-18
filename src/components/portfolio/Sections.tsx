@@ -549,7 +549,7 @@ export function Contact() {
                       type="text"
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
-                      className="w-full rounded-xl border border-[color:var(--border)] bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      className="w-full rounded-xl border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </label>
                   <label className="block">
@@ -561,7 +561,7 @@ export function Contact() {
                       type="email"
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
-                      className="w-full rounded-xl border border-[color:var(--border)] bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      className="w-full rounded-xl border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </label>
                 </div>
@@ -574,7 +574,7 @@ export function Contact() {
                     rows={5}
                     value={contactMessage}
                     onChange={(e) => setContactMessage(e.target.value)}
-                    className="w-full resize-none rounded-xl border border-[color:var(--border)] bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    className="w-full resize-none rounded-xl border bg-background/60 px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </label>
                 <button
