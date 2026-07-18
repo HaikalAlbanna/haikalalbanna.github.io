@@ -6,8 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import profileImg from "@/assets/profile.jpg";
@@ -60,7 +58,7 @@ function SkillPlaceholder({ label }: { label: string }) {
   const icon = skillIconMap[label] ?? htmlIcon;
 
   return (
-    <div className="group flex w-28 flex-col items-center gap-3 rounded-[10px] border border-border bg-background p-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+    <div className="group flex w-full max-w-[7rem] flex-col items-center gap-3 rounded-[10px] border border-border bg-background p-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
       <div className="flex h-16 w-16 items-center justify-center rounded-[14px] border border-border bg-card p-2">
         <img src={icon} alt={`${label} icon`} className="h-full w-full object-contain" />
       </div>
@@ -214,7 +212,7 @@ export function Skills() {
           <Reveal key={t.skills.categories[0].name} delay={0}>
             <div className="rounded-3xl border border-border bg-card p-6">
               <h3 className="font-display text-lg font-semibold">{t.skills.categories[0].name}</h3>
-              <div className="mt-6 grid grid-cols-4 gap-2 justify-items-center">
+              <div className="mt-6 grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-4">
                 {t.skills.categories[0].items.map((item) => (
                   <SkillPlaceholder key={item.label} label={item.label} />
                 ))}
@@ -303,8 +301,7 @@ export function Projects() {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <CarouselPrevious className="bg-background/70 text-foreground shadow-md left-4" />
-            <CarouselContent className="flex items-stretch">
+              <CarouselContent className="flex items-stretch">
               {t.projects.items.slice(0, 2).map((p, i) => (
                 <CarouselItem
                   key={p.title}
@@ -358,7 +355,6 @@ export function Projects() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselNext className="bg-background/70 text-foreground shadow-md right-4" />
           </Carousel>
           <div className="mt-4 flex justify-center gap-2">
             {t.projects.items.slice(0, 2).map((_, index) => (
