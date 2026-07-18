@@ -12,6 +12,8 @@
     <script>
       // Minimal runtime stub for TanStack Start when serving as static SPA on GitHub Pages
       window.$_TSR = window.$_TSR || {};
+      window.$_TSR.buffer = window.$_TSR.buffer || [];
+      window.$_TSR.t = window.$_TSR.t || new Map();
       window.$_TSR.initialized = true;
       window.$_TSR.router = window.$_TSR.router || { matches: [], lastMatchId: null, manifest: {}, dehydratedData: {} };
     </script>
