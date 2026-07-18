@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
-type Ctx = { theme: Theme; toggle: () => void };
+type Ctx = { theme: Theme; mounted: boolean; toggle: () => void };
 
 const ThemeContext = createContext<Ctx | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = (typeof window !== "undefined" && localStorage.getItem("theme")) as Theme | null;
@@ -16,9 +17,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         ? "light"
         : "dark");
     setTheme(initial);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     const root = document.documentElement;
     root.classList.toggle("dark", theme === "dark");
     root.style.colorScheme = theme;
@@ -27,10 +30,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } catch {
       /* ignore */
     }
-  }, [theme]);
+  }, [theme, mounted]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) }}>
+    <ThemeContext.Provider value={{ theme, mounted, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) }}>
       {children}
     </ThemeContext.Provider>
   );

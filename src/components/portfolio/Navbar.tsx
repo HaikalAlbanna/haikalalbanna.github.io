@@ -4,7 +4,7 @@ import { useTheme } from "@/lib/theme";
 import { useI18n } from "@/lib/i18n";
 
 export function Navbar() {
-  const { theme, toggle: toggleTheme } = useTheme();
+  const { theme, mounted, toggle: toggleTheme } = useTheme();
   const { lang, t, toggle: toggleLang } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -67,7 +67,11 @@ export function Navbar() {
               className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-secondary/40 transition-colors hover:bg-secondary"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {mounted
+              ? theme === "dark"
+                ? <Sun className="h-4 w-4" />
+                : <Moon className="h-4 w-4" />
+              : <span className="h-4 w-4" />}
             </button>
             <a
               href="#contact"
