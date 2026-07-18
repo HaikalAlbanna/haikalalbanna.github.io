@@ -163,7 +163,6 @@ export function Hero() {
                     Palembang, ID
                   </div>
                   <div className="flex items-center gap-1.5 font-semibold text-accent-cyan">
-                    <Sparkles className="h-3.5 w-3.5" />
                     Open to work
                   </div>
                 </div>
@@ -334,13 +333,6 @@ export function Projects() {
                           </div>
 
                           <div className="mt-8 flex flex-wrap gap-3">
-                            <a
-                              href="#"
-                              className="inline-flex items-center gap-3 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg hover:opacity-95"
-                            >
-                              <span className="inline-block h-3 w-3 rounded-full bg-white/30" />
-                              Live Demo
-                            </a>
                             <a
                               href={p.repo ?? "#"}
                               target={p.repo ? "_blank" : undefined}
