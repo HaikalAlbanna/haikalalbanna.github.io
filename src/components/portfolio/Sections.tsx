@@ -1,4 +1,4 @@
-import { ArrowRight, Download, ExternalLink, Github, Instagram, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { Download, Github, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
@@ -58,11 +58,11 @@ function SkillPlaceholder({ label }: { label: string }) {
   const icon = skillIconMap[label] ?? htmlIcon;
 
   return (
-    <div className="group flex w-full max-w-[7rem] flex-col items-center gap-3 rounded-[10px] border border-border bg-background p-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
-      <div className="flex h-16 w-16 items-center justify-center rounded-[14px] border border-border bg-card p-2">
+    <div className="group flex w-full flex-col items-center gap-2 rounded-[10px] border border-border bg-background p-2 sm:p-3 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+      <div className="flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-[10px] sm:rounded-[14px] border border-border bg-card p-1.5 sm:p-2">
         <img src={icon} alt={`${label} icon`} className="h-full w-full object-contain" />
       </div>
-      <span className="text-sm font-semibold text-foreground">{label}</span>
+      <span className="text-[10px] sm:text-xs font-semibold text-foreground leading-tight">{label}</span>
     </div>
   );
 }
@@ -115,7 +115,6 @@ export function Hero() {
                   className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-[1.02] glow-primary"
                 >
                   {t.hero.viewProjects}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
                   href="/CV - Haikal Tirta Albanna 2026.pdf"
@@ -212,7 +211,7 @@ export function Skills() {
           <Reveal key={t.skills.categories[0].name} delay={0}>
             <div className="rounded-3xl border border-border bg-card p-6">
               <h3 className="font-display text-lg font-semibold">{t.skills.categories[0].name}</h3>
-              <div className="mt-6 grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-4">
+              <div className="mt-6 grid grid-cols-4 gap-2 justify-items-center sm:grid-cols-4 md:grid-cols-6">
                 {t.skills.categories[0].items.map((item) => (
                   <SkillPlaceholder key={item.label} label={item.label} />
                 ))}
@@ -224,7 +223,9 @@ export function Skills() {
               <Reveal key={category.name} delay={(i + 1) * 80}>
                 <div className="mx-auto w-full max-w-md rounded-3xl border border-border bg-card p-6">
                   <h3 className="font-display text-lg font-semibold">{category.name}</h3>
-                  <div className={`mt-6 grid ${category.items.length === 3 ? "grid-cols-3" : "grid-cols-2"} gap-3 justify-items-center`}>
+                  <div className={`mt-6 grid gap-2 justify-items-center ${
+                    category.items.length === 3 ? "grid-cols-3" : "grid-cols-2"
+                  }`}>
                     {category.items.map((item) => (
                       <SkillPlaceholder key={item.label} label={item.label} />
                     ))}
@@ -581,7 +582,6 @@ export function Contact() {
                   className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-[1.01] glow-primary sm:w-auto"
                 >
                   {sent ? t.contact.sent : t.contact.send}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </form>
             </Reveal>
