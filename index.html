@@ -16,7 +16,27 @@
       window.$_TSR.t = window.$_TSR.t || new Map();
       window.$_TSR.initialized = true;
       window.$_TSR.h = window.$_TSR.h || function() { /* hydration/no-op for static deploy */ };
-      window.$_TSR.router = window.$_TSR.router || { matches: [], lastMatchId: null, manifest: {}, dehydratedData: {} };
+      // Embed the build manifest so the client can resolve routes without SSR
+      window.$_TSR.router = window.$_TSR.router || {
+        matches: [],
+        lastMatchId: null,
+        dehydratedData: {},
+        manifest: {
+          routes: {
+            "__root__": {
+              filePath: "C:/D/project/portofolio/src/routes/__root.tsx",
+              children: ["/"],
+              preloads: ["/assets/index-C9Z6uyf2.js"],
+              scripts: [{ attrs: { type: "module", async: true, src: "/assets/index-C9Z6uyf2.js" } }]
+            },
+            "/": {
+              filePath: "C:/D/project/portofolio/src/routes/index.tsx",
+              children: undefined,
+              preloads: ["/assets/routes-CNMfwx7F.js"]
+            }
+          }
+        }
+      };
     </script>
     <script type="module" src="assets/index-C9Z6uyf2.js"></script>
   </body>
