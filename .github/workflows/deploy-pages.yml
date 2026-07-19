@@ -33,6 +33,17 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Generate static index.html
+        run: bash generate-index.sh
+
+      - name: Copy public assets
+        run: |
+          cp -f public/* dist/client/ 2>/dev/null || true
+          cp -f favicon.ico dist/client/ 2>/dev/null || true
+          cp -f icon-icons.png dist/client/ 2>/dev/null || true
+          cp -f "CV - Haikal Tirta Albanna 2026.pdf" dist/client/ 2>/dev/null || true
+          touch dist/client/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
