@@ -211,7 +211,7 @@ export function Skills() {
           <Reveal key={t.skills.categories[0].name} delay={0}>
             <div className="rounded-3xl border border-border bg-card p-6">
               <h3 className="font-display text-lg font-semibold">{t.skills.categories[0].name}</h3>
-              <div className="mt-6 grid grid-cols-4 gap-2 justify-items-center sm:grid-cols-4 md:grid-cols-6">
+              <div className="mt-6 grid grid-cols-3 gap-2 justify-items-center">
                 {t.skills.categories[0].items.map((item) => (
                   <SkillPlaceholder key={item.label} label={item.label} />
                 ))}
