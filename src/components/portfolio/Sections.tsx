@@ -431,7 +431,7 @@ export function Certificates() {
         </Reveal>
 
         <div className="mt-10">
-          <div className="flex gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] scrollbar-none">
             {t.certificates.items.map((certificate, index) => {
               const isSelected = selectedItem?.name === certificate.name;
 
@@ -440,11 +440,11 @@ export function Certificates() {
                   <button
                     type="button"
                     onClick={() => setSelectedId(certificate.name)}
-                    className={`group min-w-[260px] rounded-[20px] border bg-card p-2 text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_35px_rgba(0,0,0,0.08)] ${
+                    className={`group min-w-65 rounded-4xl border bg-card p-2 text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_35px_rgba(0,0,0,0.08)] ${
                       isSelected ? "border-primary/70 bg-primary/5 shadow-[0_20px_40px_rgba(62,91,255,0.12)]" : "border-border"
                     }`}
                   >
-                    <div className="overflow-hidden rounded-[16px] border border-border bg-background">
+                    <div className="overflow-hidden rounded-3xl border border-border bg-background">
                       <img
                         src={certificate.file}
                         alt={certificate.name}
@@ -541,7 +541,7 @@ export function Certificates() {
                             key={`${selectedItem.name}-${index}`}
                             type="button"
                             onClick={() => setLightboxImage(image)}
-                            className="block overflow-hidden rounded-[16px] border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
+                            className="block overflow-hidden rounded-3xl border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
                           >
                             <img
                               src={image}
@@ -565,14 +565,16 @@ export function Certificates() {
                   <img
                     src={selectedItem.file}
                     alt={selectedItem.name}
-                    className="h-[340px] w-full object-cover"
+                    className="h-85 w-full object-cover"
                   />
                 </button>
 
                 <div className="flex flex-col justify-center">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    {selectedItem.date}
-                  </p>
+                  {selectedItem.date && (
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      {selectedItem.date}
+                    </p>
+                  )}
                   <h3 className="mt-3 font-display text-2xl font-semibold text-foreground sm:text-3xl">
                     {selectedItem.name}
                   </h3>
@@ -599,7 +601,7 @@ export function Certificates() {
                           key={`${selectedItem.name}-${index}`}
                           type="button"
                           onClick={() => setLightboxImage(image)}
-                          className="block overflow-hidden rounded-[16px] border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
+                          className="block overflow-hidden rounded-3xl border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
                         >
                           <img
                             src={image}
@@ -620,8 +622,10 @@ export function Certificates() {
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4"
             onClick={() => setLightboxImage(null)}
+            role="dialog"
+            aria-modal="true"
           >
-            <div className="relative w-full max-w-5xl">
+            <div className="relative w-full max-w-5xl" onClick={(event) => event.stopPropagation()}>
               <button
                 type="button"
                 onClick={() => setLightboxImage(null)}
@@ -633,7 +637,6 @@ export function Certificates() {
                 src={lightboxImage}
                 alt="Certificate preview"
                 className="max-h-[85vh] w-full rounded-2xl object-contain shadow-2xl"
-                onClick={(event) => event.stopPropagation()}
               />
             </div>
           </div>
