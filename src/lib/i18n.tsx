@@ -127,6 +127,44 @@ const dict = {
         },
       ],
     },
+    certificates: {
+      eyebrow: "Sertifikat",
+      title: "Dokumentasi pengalaman dan kompetensi yang saya miliki.",
+      items: [
+        {
+          name: "MSIB Batch 6",
+          issuer: "MSIB Batch 6 – LLDIKTI Wilayah II",
+          description: "Sertifikat penyelesaian program Magang dan Studi Independen Bersertifikat (MSIB) Batch 6 di LLDIKTI Wilayah II sebagai Information System Developer. Melalui program ini, saya memperoleh pengalaman dalam analisis kebutuhan sistem, pengembangan aplikasi web menggunakan Laravel, integrasi database, pengujian sistem, serta pengelolaan dan verifikasi data administrasi. Pengalaman tersebut meningkatkan kemampuan saya dalam pengembangan sistem informasi, analisis sistem, pengelolaan database, dan pemecahan masalah teknis.",
+          file: "/sertifikat/MSIB 6.jpg",
+          cta: "Lihat gambar",
+          pages: []
+        },
+        {
+          name: "MSIB Batch 7",
+          issuer: "MSIB Batch 7 – Grow Bangkit Academy",
+          description: "Sertifikat penyelesaian program Studi Independen MSIB Batch 7 di Grow Bangkit Academy dengan fokus pembelajaran Cloud Computing. Melalui program ini, saya memperoleh pengetahuan dan pemahaman mengenai konsep dasar cloud computing, layanan cloud, infrastruktur cloud, serta penerapan teknologi cloud dalam pengembangan aplikasi dan sistem. Program ini juga mengembangkan kemampuan problem solving, kolaborasi, dan penerapan teknologi dalam proyek pembelajaran.",
+          file: "/sertifikat/MSIB 7.jpg",
+          cta: "Lihat gambar",
+          pages: []
+        },
+        {
+          name: "Sertifikat MagangHub",
+          issuer: "MagangHub Batch 3 – Bapas Kelas II OKU Induk",
+          description: "Sertifikat pengalaman mengikuti program MagangHub Batch 3 di Balai Pemasyarakatan (Bapas) Kelas II OKU Induk pada Divisi Pengelolaan Fasilitas Umum. Melalui program ini, saya memperoleh pengalaman mengenai lingkungan kerja instansi pemerintahan, administrasi, pengelolaan data kehadiran, koordinasi tim, serta pelaksanaan kegiatan operasional instansi. Pengalaman ini membantu meningkatkan kemampuan administrasi, kedisiplinan, komunikasi, dan kerja sama dalam lingkungan profesional.",
+          file: "/sertifikat/MAGANG HUB.jpg",
+          cta: "Lihat gambar",
+          pages: []
+        },
+        {
+          name: "Surat Pengalaman Magang Bapas",
+          issuer: "Surat Pengalaman Magang – Bapas Kelas II OKU Induk",
+          description: "Surat pengalaman magang yang menerangkan pelaksanaan kegiatan magang di Balai Pemasyarakatan (Bapas) Kelas II OKU Induk, sebuah instansi yang berada dalam lingkungan Kementerian Imigrasi dan Pemasyarakatan Republik Indonesia dan memiliki tugas dalam pelaksanaan bimbingan serta pendampingan klien pemasyarakatan. Periode pelaksanaan magang: 16 Desember 2025 – 16 Juni 2026. Selama menjalani magang, saya ditempatkan pada Divisi Pengelolaan Fasilitas Umum dan memperoleh pengalaman dalam lingkungan kerja instansi pemerintahan.",
+          file: "/sertifikat/SURAT PENGALAMAN MAGANG LEMBAR 1.jpg",
+          cta: "Lihat detail",
+          pages: ["/sertifikat/SURAT PENGALAMAN MAGANG LEMBAR 2.jpg"]
+        },
+      ],
+    },
     testimonials: {
       eyebrow: "Testimoni",
       title: "Apa kata mereka yang pernah bekerja bersama.",
@@ -284,6 +322,48 @@ const dict = {
           role: "Information Systems Development",
           company: "LLDIKTI Region II",
           desc: "Developing Laravel-based web applications, conducting system requirements analysis, and database design.",
+        },
+      ],
+    },
+    certificates: {
+      eyebrow: "Certificates",
+      title: "Documentation of the experience and skills I have built.",
+      items: [
+        {
+          name: "Magang Hub Certificate",
+          issuer: "Ministry of Manpower of the Republic of Indonesia",
+          date: "2025",
+          description: "An internship experience focused on using information technology to support operational and public service processes.",
+          file: "/sertifikat/MAGANG HUB.jpg",
+          cta: "View image",
+          pages: []
+        },
+        {
+          name: "MSIB Batch 7",
+          issuer: "Ministry of Education and Culture",
+          date: "2025",
+          description: "A certified independent study program that strengthened my technical skills, communication, and team-based project management.",
+          file: "/sertifikat/MSIB 7.jpg",
+          cta: "View image",
+          pages: []
+        },
+        {
+          name: "MSIB Batch 6",
+          issuer: "Ministry of Education and Culture",
+          date: "2025",
+          description: "Participation certificate in a self-directed learning and collaboration program focused on digital technology and application development.",
+          file: "/sertifikat/MSIB 6.jpg",
+          cta: "View image",
+          pages: []
+        },
+        {
+          name: "Internship Experience Letter",
+          issuer: "BAPAS Class II OKU Induk",
+          date: "2026",
+          description: "An official document recording the internship experience and contribution to the digitization of administrative and operational services. It includes the work details and validation records across the relevant pages.",
+          file: "/sertifikat/SURAT PENGALAMAN MAGANG LEMBAR 1.jpg",
+          cta: "View details",
+          pages: ["/sertifikat/SURAT PENGALAMAN MAGANG LEMBAR 2.jpg"]
         },
       ],
     },

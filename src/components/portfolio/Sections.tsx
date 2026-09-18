@@ -1,4 +1,4 @@
-import { Download, Github, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Download, Github, Instagram, Linkedin, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
@@ -69,8 +69,8 @@ function SkillPlaceholder({ label }: { label: string }) {
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-      <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_2px_var(--primary)]" />
+    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-100 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] backdrop-blur-sm">
+      <span className="h-2.5 w-2.5 rounded-full bg-violet-400 shadow-[0_0_18px_rgba(167,139,250,0.9)]" />
       {children}
     </div>
   );
@@ -84,16 +84,6 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.15fr_1fr]">
           <div>
-            <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-xs font-medium">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-cyan opacity-70" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-cyan" />
-                </span>
-                {t.hero.badge}
-              </div>
-            </Reveal>
-
             <Reveal delay={80}>
               <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
                 {t.hero.name}
@@ -411,6 +401,243 @@ export function Experience() {
             ))}
           </ol>
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function Certificates() {
+  const { t } = useI18n();
+  const [selectedId, setSelectedId] = useState(t.certificates.items[0]?.name ?? "");
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!t.certificates.items.some((item) => item.name === selectedId)) {
+      setSelectedId(t.certificates.items[0]?.name ?? "");
+    }
+  }, [selectedId, t.certificates.items]);
+
+  const selectedItem = t.certificates.items.find((item) => item.name === selectedId) ?? t.certificates.items[0];
+  const isBapasLetter = selectedItem?.name === "Surat Pengalaman Magang Bapas";
+
+  return (
+    <section id="certificates" className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-4">
+        <Reveal>
+          <Eyebrow>{t.certificates.eyebrow}</Eyebrow>
+          <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            {t.certificates.title}
+          </h2>
+        </Reveal>
+
+        <div className="mt-10">
+          <div className="flex gap-4 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none]">
+            {t.certificates.items.map((certificate, index) => {
+              const isSelected = selectedItem?.name === certificate.name;
+
+              return (
+                <Reveal key={certificate.name} delay={index * 80}>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(certificate.name)}
+                    className={`group min-w-[260px] rounded-[20px] border bg-card p-2 text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_35px_rgba(0,0,0,0.08)] ${
+                      isSelected ? "border-primary/70 bg-primary/5 shadow-[0_20px_40px_rgba(62,91,255,0.12)]" : "border-border"
+                    }`}
+                  >
+                    <div className="overflow-hidden rounded-[16px] border border-border bg-background">
+                      <img
+                        src={certificate.file}
+                        alt={certificate.name}
+                        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </div>
+
+                    <div className="mt-3 text-center">
+                      <h3 className="truncate font-display text-base font-semibold text-foreground">
+                        {certificate.name}
+                      </h3>
+                    </div>
+                  </button>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+
+        {selectedItem && (
+          <div className="mt-8 rounded-[28px] border border-border bg-card/80 p-4 sm:p-6">
+            {isBapasLetter ? (
+              <div className="w-full">
+                <div className="mb-6 border-b border-white/10 pb-4">
+                  <h3 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
+                    {selectedItem.name}
+                  </h3>
+                </div>
+
+                <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+                  <div className="rounded-[22px] bg-[#f3f3f4] p-6 text-[#111827] shadow-inner">
+                    <p className="text-base font-medium">Dengan ini menerangkan bahwa:</p>
+
+                    <div className="mt-4 space-y-2 text-base">
+                      <div className="grid grid-cols-[110px_10px_1fr] gap-x-2">
+                        <span>Nama</span>
+                        <span>:</span>
+                        <span className="font-semibold">HAIKAL TIRTA ALBANNA</span>
+                      </div>
+                      <div className="grid grid-cols-[110px_10px_1fr] gap-x-2">
+                        <span>Universitas</span>
+                        <span>:</span>
+                        <span>UNIVERSITAS BINA DARMA</span>
+                      </div>
+                      <div className="grid grid-cols-[110px_10px_1fr] gap-x-2">
+                        <span>Program studi</span>
+                        <span>:</span>
+                        <span>TEKNIK INFORMATIKA</span>
+                      </div>
+                    </div>
+
+                    <p className="mt-5 text-base leading-relaxed">
+                      Telah melaksanakan <span className="font-semibold">Program Magang di Balai Pemasyarakatan Kelas II OKU Induk</span> selama
+                      6 (enam) bulan, terhitung mulai tanggal 16 Desember 2025 sampai dengan 15 Juni 2026.
+                    </p>
+
+                    <p className="mt-4 text-base leading-relaxed">
+                      Selama mengikuti program magang, yang bersangkutan telah berpartisipasi aktif dalam pelaksanaan tugas dan kegiatan
+                      pada Balai Pemasyarakatan Kelas II OKU Induk dengan uraian pekerjaan sebagai berikut:
+                    </p>
+
+                    <ol className="mt-4 list-decimal space-y-2 pl-6 text-base leading-relaxed">
+                      <li>Melakukan analisis kebutuhan sistem sebagai dasar pengembangan website instansi sesuai dengan kebutuhan organisasi.</li>
+                      <li>Merancang, mengembangkan, dan menyempurnakan website Balai Pemasyarakatan.</li>
+                    </ol>
+                  </div>
+
+                  <div className="flex flex-col justify-center">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      {selectedItem.issuer}
+                    </p>
+
+                    <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                      Surat pengalaman magang yang menerangkan pelaksanaan kegiatan magang di Balai Pemasyarakatan (Bapas) Kelas II OKU
+                      Induk, sebuah instansi yang berada dalam lingkungan Kementerian Imigrasi dan Pemasyarakatan Republik Indonesia dan
+                      memiliki tugas dalam pelaksanaan bimbingan serta pendampingan klien pemasyarakatan. Periode pelaksanaan magang: 16
+                      Desember 2025 – 16 Juni 2026. Selama menjalani magang, saya ditempatkan pada Divisi Pengelolaan Fasilitas Umum dan
+                      memperoleh pengalaman dalam lingkungan kerja instansi pemerintahan.
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage(selectedItem.file)}
+                      className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-violet-500 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+                    >
+                      Lihat detail
+                      <ArrowUpRight className="h-4 w-4" />
+                    </button>
+
+                    {(selectedItem.pages ?? []).length > 0 && (
+                      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                        {[selectedItem.file, ...(selectedItem.pages ?? [])].map((image, index) => (
+                          <button
+                            key={`${selectedItem.name}-${index}`}
+                            type="button"
+                            onClick={() => setLightboxImage(image)}
+                            className="block overflow-hidden rounded-[16px] border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
+                          >
+                            <img
+                              src={image}
+                              alt={`${selectedItem.name} ${index + 1}`}
+                              className="h-32 w-full object-cover"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <button
+                  type="button"
+                  onClick={() => setLightboxImage(selectedItem.file)}
+                  className="block overflow-hidden rounded-[24px] border border-border bg-background text-left"
+                >
+                  <img
+                    src={selectedItem.file}
+                    alt={selectedItem.name}
+                    className="h-[340px] w-full object-cover"
+                  />
+                </button>
+
+                <div className="flex flex-col justify-center">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    {selectedItem.date}
+                  </p>
+                  <h3 className="mt-3 font-display text-2xl font-semibold text-foreground sm:text-3xl">
+                    {selectedItem.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{selectedItem.issuer}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {selectedItem.description}
+                  </p>
+
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxImage(selectedItem.file)}
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
+                    >
+                      {selectedItem.cta}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  {(selectedItem.pages ?? []).length > 0 && (
+                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                      {[selectedItem.file, ...(selectedItem.pages ?? [])].map((image, index) => (
+                        <button
+                          key={`${selectedItem.name}-${index}`}
+                          type="button"
+                          onClick={() => setLightboxImage(image)}
+                          className="block overflow-hidden rounded-[16px] border border-border bg-background text-left transition-transform hover:-translate-y-0.5"
+                        >
+                          <img
+                            src={image}
+                            alt={`${selectedItem.name} ${index + 1}`}
+                            className="h-28 w-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {lightboxImage && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4"
+            onClick={() => setLightboxImage(null)}
+          >
+            <div className="relative w-full max-w-5xl">
+              <button
+                type="button"
+                onClick={() => setLightboxImage(null)}
+                className="absolute -top-12 right-0 rounded-full border border-white/20 bg-black/40 px-3 py-1 text-sm text-white"
+              >
+                Tutup
+              </button>
+              <img
+                src={lightboxImage}
+                alt="Certificate preview"
+                className="max-h-[85vh] w-full rounded-2xl object-contain shadow-2xl"
+                onClick={(event) => event.stopPropagation()}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
